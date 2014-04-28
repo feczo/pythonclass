@@ -1,3 +1,3 @@
-def add(a,b):
+def add(a, b):
     return a+b
-add(3,'b')
+add(3, 'b')
