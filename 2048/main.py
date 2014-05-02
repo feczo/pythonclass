@@ -1,21 +1,22 @@
 from numpy import random, array
 
-a = array([[None for i in range(4)] for i in range(4)])
+grid = array([[None for i in range(4)] for i in range(4)])
 
 def addblock():
     col = random.randint(4)
     row = random.randint(4)
-    if not a[row, col]:
-        a[row, col] = 2
+    if not grid[row, col]:
+        grid[row, col] = 2
     else:
         addblock()
 
 
 def move(way, collapse=0):
+    print way
     change = False
     if way in ['down', 'right']:
         rows =  list(reversed(range(1,4)))
-    if way in ['up', 'left']:
+    elif way in ['up', 'left']:
         rows =  range(3)
 
     for col in range(4):
@@ -32,14 +33,14 @@ def move(way, collapse=0):
             if way == 'right':
 	         curr = (col, row)
 	         prev = (col, row-1)
-    	    if a[prev]:
-    		if not a[curr]:
-    		    a[curr] = a[prev]
-    	            a[prev] = None
+    	    if grid[prev]:
+    		if not grid[curr]:
+    		    grid[curr] = grid[prev]
+    	            grid[prev] = None
                     change = True
-    	        if a[prev] == a[curr]:
-    		    a[curr] *= 2
-    	            a[prev] = None
+    	        if grid[prev] == grid[curr]:
+    		    grid[curr] *= 2
+    	            grid[prev] = None
 		    collapse += 1
 		    #if collapse < 2:
 		    #    change = True
@@ -53,6 +54,3 @@ def move(way, collapse=0):
 
 addblock()
 addblock()
-
-for i in range(4):
-	a[0,i] = 2
