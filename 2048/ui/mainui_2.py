@@ -26,4 +26,4 @@ def createblock(number):
     canvas.save('/tmp/try7.svg')
 
 
-createblock(32)
+createblock(128)
