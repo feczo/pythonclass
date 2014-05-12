@@ -1,0 +1,15 @@
+# Sample datastore_admin application.
+# You can use the -A flag for appcfg to upload this to your application.
+# For more information, see 
+# http://developers.google.com/appengine/docs/adminconsole/
+
+
+application: [APPID]
+version: [VERSIONNUMBER]
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /mod_remote_api.*
+  script: remote_api_handler_mod.application

@@ -1,0 +1,25 @@
+application: google.com:dashdemo
+version: bq
+runtime: python27
+api_version: 1
+threadsafe: no
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: .*
+  script: main.application
+
+- url: /stats.*
+  script: google.appengine.ext.appstats.ui.app
+
+libraries:
+- name: django
+  version: latest
+- name: webapp2
+  version: latest
+
+builtins:
+- appstats: on
