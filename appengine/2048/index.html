@@ -1,0 +1,32 @@
+template = '''<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="author" content="myself">
+<title>My 2048</title>
+<style type="text/css">
+div.myblock {
+  color: green;
+}
+span {
+  padding-right: 5px;
+}
+</style>
+</head>
+<body>
+<script src="/js/keyboard_input_manager.js"></script>
+<table class="game-container">
+<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>
+<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>
+<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>
+<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>
+</table>
+
+<form action='/' method='get'>
+  <input type='submit' name='move' value='up' />
+  <input type='submit' name='move' value='down' />
+  <input type='submit' name='move' value='left' />
+  <input type='submit' name='move' value='right' />
+</form>
+{{ blocks }}
+</body>
+</html>
