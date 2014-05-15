@@ -8,15 +8,15 @@ from grid import *
 
 
 jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
-    extensions=['jinja2.ext.autoescape'],
-    autoescape=True)
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 
 def format(grid):
-    content = tuple(map(lambda cell: createblock(cell), grid))
-    return content
-
+    blocks = [[None for i in range(4)] for i in range(4)]
+    for i in range(4):
+        for j in range(4):
+            blocks[i][j] = createblock(grid.get(i,j))
+    return blocks
 
 class MainPage(webapp2.RequestHandler):
 
@@ -25,12 +25,11 @@ class MainPage(webapp2.RequestHandler):
         nextmove = None
         try:
             nextmove = self.request.get('move')
+            grid.move(nextmove)
         except:
             pass
-        if nextmove:
-            move(get_dict['move'][0])
 
-        blocks = format(grid.flatten())
+        blocks = format(grid)
         template = jinja_environment.get_template('index.html')
         self.response.out.write(template.render(blocks=blocks))
 

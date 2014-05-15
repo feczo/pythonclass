@@ -5,11 +5,12 @@ pendown()
 
 def angle_calc(sides):
     """Angle Calculator
-    
+
     >>> angle_calc(4)
     90
     """
-    return 3600//sides
+    return 360//sides
+
 
 def shape(sides, size):
     for i in range(sides):

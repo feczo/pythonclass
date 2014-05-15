@@ -10,53 +10,53 @@ def addblock():
     else:
         addblock()
 
+
 def down():
     change = False
     for col in range(4):
-        for row in reversed(range(1,4)):
-	    if a[row-1][col]:
-	        if a[row-1][col] == a[row][col]:
-		    a[row][col] *= 2
-	            a[row-1][col] = None
-		    change = True
-		if not a[row][col]:
-		    a[row][col] = a[row-1][col]
-	            a[row-1][col] = None
-		    change = True
+        for row in reversed(range(1, 4)):
+            if a[row-1][col]:
+                if a[row-1][col] == a[row][col]:
+                    a[row][col] *= 2
+                    a[row-1][col] = None
+                    change = True
+                if not a[row][col]:
+                    a[row][col] = a[row-1][col]
+                    a[row-1][col] = None
+                    change = True
     if change:
         down()
+
 
 def up():
     for col in range(4):
         for row in range(3):
-	    if a[row+1][col]:
-	        if a[row+1][col] == a[row][col]:
-		    a[row][col] *= 2
-	            a[row+1][col] = None
-		if not a[row][col]:
-		    a[row][col] = a[row+1][col]
-	            a[row+1][col] = None
-
+            if a[row+1][col]:
+                if a[row+1][col] == a[row][col]:
+                    a[row][col] *= 2
+                    a[row+1][col] = None
+            if not a[row][col]:
+                    a[row][col] = a[row+1][col]
+                    a[row+1][col] = None
 
 
 def left():
     for row in range(4):
         for col in range(3):
-	    print a[row][col]
-	    if a[row][col+1]:
-	        if a[row][col+1] == a[row][col]:
-		    a[row][col] *= 2
-	            a[row][col+1] = None
-		if not a[row][col]:
-		    a[row][col] = a[row][col+1]
-	            a[row][col+1] = None
+            print a[row][col]
+            if a[row][col+1]:
+                if a[row][col+1] == a[row][col]:
+                    a[row][col] *= 2
+                    a[row][col+1] = None
+                if not a[row][col]:
+                    a[row][col] = a[row][col+1]
+                    a[row][col+1] = None
 
 
 addblock()
 addblock()
 
 a = [[2, None, None, None],
-[None, None, None, None],
-[4, None, None, None],
-[4, 2, None, None]]
-
+     [None, None, None, None],
+     [4, None, None, None],
+     [4, 2, None, None]]

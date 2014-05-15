@@ -1,4 +1,4 @@
-template = '''<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <head>
 <meta name="author" content="myself">
@@ -13,12 +13,15 @@ span {
 </style>
 </head>
 <body>
-<script src="/js/keyboard_input_manager.js"></script>
+
 <table class="game-container">
-<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>
-<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>
-<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>
-<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>
+{% for row in range(4) %}
+  <tr>
+  {% for column in range(4) %}
+    <td>{{ blocks[row][column] }}</td>
+  {% endfor %}
+  </tr>
+{% endfor %}
 </table>
 
 <form action='/' method='get'>
@@ -27,6 +30,5 @@ span {
   <input type='submit' name='move' value='left' />
   <input type='submit' name='move' value='right' />
 </form>
-{{ blocks }}
 </body>
 </html>
