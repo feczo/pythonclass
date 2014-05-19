@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta name="author" content="myself">
+<title>My 2048</title>
+<style type="text/css">
+div.myblock {
+  color: green;
+}
+span {
+  padding-right: 5px;
+}
+</style>
+</head>
+<body>
+<table class="game-container">
+{% for row in range(4) %}
+  <tr>
+  {% for column in range(4) %}
+    <td id="{{ 'c%d%d' % (row,column) }}">{{ blocks[row][column] }}</td>
+  {% endfor %}
+  </tr>
+{% endfor %}
+</table>
+
+<form action='/' method='get'>
+  <input type='submit' name='action' value='up' />
+  <input type='submit' name='action' value='down' />
+  <input type='submit' name='action' value='left' />
+  <input type='submit' name='action' value='right' />
+</form>
+<script type='text/javascript'>
+// create a global '$' variable
+window.$ = function(selector) {
+    return document.querySelector(selector);
+};
+
+function update(a) {
+    for (var i = 0; i < 4; i++) { 
+        for (var j = 0; j < 4; j++) { 
+            $("#c" + i + j).innerHTML = a[i][j];
+	}
+    }
+}
+
+document.onkeydown = checkKey;
+var actions = ['up','right','down','left','restart']
+
+function checkKey(e) {
+    e = e || window.event;
+
+    var map = {
+      38: 0, // Up
+      39: 1, // Right
+      40: 2, // Down
+      37: 3, // Left
+      75: 0, // Vim up
+      76: 1, // Vim right
+      74: 2, // Vim down
+      72: 3, // Vim left
+      87: 0, // W
+      68: 1, // D
+      83: 2, // S
+      65: 3, // A
+      82: 4  // R
+    };
+    if (map[e.keyCode] >= 0 && map[e.keyCode]<=4) {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function()
+        {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+          {
+            value = xmlhttp.responseText;
+	    value = JSON.parse(value);
+	    update(value);
+          }
+        }
+        xmlhttp.open("POST","/",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("action=" + actions[map[e.keyCode]]);
+    }
+}
+</script>
+</body>
+</html>
